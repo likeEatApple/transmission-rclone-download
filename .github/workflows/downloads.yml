@@ -12,7 +12,7 @@ jobs:
       run: sudo apt install -y  transmission-cli
     - name: Inject Rclone&Transmission config
       run: |
-        sudo mkdir -p ~/.config/rclone/
+        mkdir -p ~/.config/rclone/
         cat >  ~/.config/rclone/rclone.conf  << EOF
         ${{ secrets.RCLONE_CONF }}
         EOF
@@ -21,7 +21,7 @@ jobs:
 
     - name: mkdir
       run: |
-        mkdir /root/downloads
+        sudo mkdir /root/downloads
     - name: transmission_Downloading_File
       run: |
          sudo transmission-cli "${{ secrets.URL}}"
