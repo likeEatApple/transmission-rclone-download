@@ -11,11 +11,10 @@ jobs:
       run: |
 
         sudo uname -a
-        sudo lsmod 
+        sudo lsmod | sudo grep bbr
         sudo sysctl net.ipv4.tcp_congestion_control
         echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
         echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
-
         sudo sysctl   -p
         sudo sysctl net.ipv4.tcp_congestion_control
     - name: Rclone Install
