@@ -17,6 +17,7 @@ jobs:
         echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
         sudo sysctl   -p
         sudo sysctl net.ipv4.tcp_congestion_control
+        sudo lsmod
     - name: Rclone Install
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
