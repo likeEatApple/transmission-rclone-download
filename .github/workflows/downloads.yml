@@ -17,10 +17,12 @@ jobs:
         ${{ secrets.RCLONE_CONF }}
         EOF
 
-    - name: Rtorrent_Downloading_File
+    - name: mkdir
       run: |
         mkdir downloads
-        rtorrent -o dht.mode.set=disable,throttle.global_down.max_rate.set_kb=10240,dht.mode.set=off "${{ secrets.URL}}"
+    - name: Rtorrent_Downloading_File
+      run: |
+        rtorrent -o dht.mode.set=disable,throttle.global_down.max_rate.set_kb=10240,dht.mode.set=off,directory.default.set=downloads "${{ secrets.URL}}"
         
 
 
