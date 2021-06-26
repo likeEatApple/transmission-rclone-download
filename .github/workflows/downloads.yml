@@ -1,7 +1,7 @@
 name: AutoDownloader
 on:
-  #workflow_dispatch
-  pull
+  workflow_dispatch
+  #pull
 jobs:
   AutoDownloaderProcess:
     runs-on: ubuntu-latest
