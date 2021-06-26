@@ -1,6 +1,7 @@
 # transmission-cli-rclone-download
 
 transmission-cli download
+
 rclone upload
 
 settngs -> secrets -> RCLONE_CONF #rclone config_file
