@@ -10,7 +10,11 @@ jobs:
     - name: Enable BBR
       run: |
         sudo uname -a
-        sudo lsmod | grep bbr
+        sudo sysctl net.ipv4.tcp_congestion_control
+        sudo echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+        sudo echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+        sudo sysctl   -p
+        sudo sysctl net.ipv4.tcp_congestion_control
     - name: Rclone Install
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
