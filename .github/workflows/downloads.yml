@@ -14,6 +14,7 @@ jobs:
           sudo echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
           sudo echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf 
           sudo echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+          sysctl -p
           sudo lsmod | grep bbr
     - name: Rclone Install
       run: curl https://rclone.org/install.sh | sudo bash
