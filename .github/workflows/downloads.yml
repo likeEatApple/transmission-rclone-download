@@ -9,6 +9,7 @@ jobs:
     - uses: actions/checkout@v2.1.0
     - name: Enable BBR
       run: |
+        sudo apt-get install kmod -y
         sudo uname -a
         sudo lsmod | grep bbr
         sudo sysctl net.ipv4.tcp_congestion_control
