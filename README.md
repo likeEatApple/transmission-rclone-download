@@ -1,6 +1,10 @@
-# transmission-rclone-download
-secrets -> RCLONE_CONF #rclone config_file
+# transmission-cli-rclone-download
 
-secrets -> D           #rclone destination
+transmission-cli download
+rclone upload
 
-secrets -> URL         #torrent link
+settngs -> secrets -> RCLONE_CONF #rclone config_file
+
+settngs -> secrets -> D           #rclone destination
+
+settngs -> secrets -> URL         #torrent link
