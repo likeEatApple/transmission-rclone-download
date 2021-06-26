@@ -24,13 +24,13 @@ jobs:
         mkdir /root/downloads
     - name: transmission_Downloading_File
       run: |
-         transmission-cli "${{ secrets.URL}}"
+         sudo transmission-cli "${{ secrets.URL}}"
         
 
 
 
     - name: Rclone Synchronizing file
       run: |
-        rclone copy /root/downloads ${{ secrets.D}} -P --bwlimit 10M
+        sudo rclone copy /root/downloads ${{ secrets.D}} -P --bwlimit 10M
 
 
