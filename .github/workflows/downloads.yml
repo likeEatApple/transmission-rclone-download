@@ -9,12 +9,12 @@ jobs:
     - uses: actions/checkout@v2.1.0
     - name: Enable BBR
       run: |
-          lsmod | grep bbr
-          modprobe tcp_bbr 
-          echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
-          echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf 
-          echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-          lsmod | grep bbr
+          sudo lsmod | grep bbr
+          sudo modprobe tcp_bbr 
+          sudo echo "tcp_bbr" >> /etc/modules-load.d/modules.conf
+          sudo echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf 
+          sudo echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+          sudo lsmod | grep bbr
     - name: Rclone Install
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
