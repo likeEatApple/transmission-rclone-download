@@ -22,6 +22,8 @@ jobs:
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
+    - name: docker Install
+      run: docker -v
     - name: Inject Rclone&Transmission config
       run: |
         mkdir -p ~/.config/rclone/
