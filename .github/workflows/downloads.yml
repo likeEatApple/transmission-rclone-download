@@ -28,7 +28,7 @@ jobs:
       run: |
         mkdir -p ~/.config/rclone/
         cat >  ~/.config/rclone/rclone.conf  << EOF
-        ${{ secrets.RCLONE_CONF }}
+        ${{ secrets.RCLONE_CONF_ALI }}
         EOF
         mkdir -p ~/.config/transmission/
         wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
