@@ -18,6 +18,8 @@ jobs:
         sudo sysctl   -p
         sudo sysctl net.ipv4.tcp_congestion_control
         sudo lsmod
+    - name: Rclone Install
+      run: curl https://rclone.org/install.sh | sudo bash
     - name: youtube-dl Install
       run: sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && sudo chmod a+rx /usr/local/bin/youtube-dl
 
