@@ -38,7 +38,7 @@ jobs:
         sudo mkdir /root/downloads
     - name: youtube-dl_Downloading_File
       run: |
-        cat >  /root/1.txt  << EOF
+        sudo cat >  /root/1.txt  << EOF
         ${{ secrets.youtubedl_file }}
         EOF
          sudo youtube-dl --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors --batch-file /root/1.txt -o /root/downloads/
