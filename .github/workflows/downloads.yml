@@ -18,10 +18,11 @@ jobs:
         sudo sysctl   -p
         sudo sysctl net.ipv4.tcp_congestion_control
         sudo lsmod
-    - name: Rclone Install
-      run: curl https://rclone.org/install.sh | sudo bash
-    - name: Transmission-cli Install
-      run: sudo apt install -y  transmission-cli
+    - name: youtube-dl Install
+      run: sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && sudo chmod a+rx /usr/local/bin/youtube-dl
+
+    - name:  aria2c install 
+      run: sudo apt-get install aria2
     - name: docker Install
       run: docker run -d --name=webdav-aliyundriver --restart=always -p 127.0.0.1:8080:8080  -v /etc/localtime:/etc/localtime -e TZ="Asia/Shanghai" -e ALIYUNDRIVE_REFRESH_TOKEN="${{ secrets.ALI_TOKEN}}" -e ALIYUNDRIVE_AUTH_PASSWORD="admin" -e JAVA_OPTS="-Xmx1g" zx5253/webdav-aliyundriver
     - name: Inject Rclone&Transmission config
@@ -30,21 +31,24 @@ jobs:
         cat >  ~/.config/rclone/rclone.conf  << EOF
         ${{ secrets.RCLONE_CONF_ALI }}
         EOF
-        mkdir -p ~/.config/transmission/
-        wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
+
 
     - name: mkdir
       run: |
         sudo mkdir /root/downloads
-    - name: transmission_Downloading_File
+    - name: youtube-dl_Downloading_File
       run: |
-         sudo transmission-cli "${{ secrets.URL}}"
+        cat >  /root/1.txt  << EOF
+        ${{ secrets.youtube-dl_file }}
+        EOF
+         sudo youtube-dl --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors --batch-file /root/1.txt -o /root/downloads/
         
 
 
 
     - name: Rclone Synchronizing file
       run: |
-        sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
+        #sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
+        sudo rclone copy /root/downloads aliyunpan:/bilibili/ -P --bwlimit 20M
 
 
