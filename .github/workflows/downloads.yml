@@ -54,6 +54,7 @@ jobs:
       run: |
         #sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
         #sudo rclone copy /root/downloads aliyunpan:/bilibili/ -P --bwlimit 20M
-        sudo rclone copy /root/downloads  aliyunpan:/bilibili/${{ secrets.aliyunpan_bilibili}}-P --bwlimit 20M
+        #sudo rclone copy /root/downloads  aliyunpan:/bilibili/${{ secrets.aliyunpan_bilibili}}-P --bwlimit 20M
+        sudo rclone copy /root/downloads  aliyunpan_crypt:/bilibili/${{ secrets.aliyunpan_bilibili}}-P --bwlimit 20M
 
 
