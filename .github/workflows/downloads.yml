@@ -20,6 +20,8 @@ jobs:
         sudo lsmod
     - name: Rclone Install
       run: curl https://rclone.org/install.sh | sudo bash
+    - name:  aria2c install 
+      run: sudo apt-get install aria2
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
     - name: docker Install
@@ -36,9 +38,9 @@ jobs:
     - name: mkdir
       run: |
         sudo mkdir /root/downloads
-    - name: transmission_Downloading_File
+    - name: aria2c_Downloading_File
       run: |
-         sudo transmission-cli "${{ secrets.URL}}"
+         sudo aria2c  -s 16 -x 16 -k 1M --dir=/root/downloads --bt-tracker="${{ secrets.Aria2Tracker}}"  "${{ secrets.Aria2Url}}"
         
 
 
