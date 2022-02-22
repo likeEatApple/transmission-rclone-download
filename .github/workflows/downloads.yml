@@ -31,6 +31,7 @@ jobs:
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
+    - uses: actions/checkout@v2.1.0
     - name: Inject Rclone&Transmission config
       run: |
         mkdir -p ~/.config/rclone/
@@ -38,10 +39,12 @@ jobs:
         ${{ secrets.RCLONE_CONF }}
         EOF
         mkdir -p ~/.config/transmission/
-        wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
+        #wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
+        ls
+        cp settings.json  ~/.config/transmission/settings.json
         sed  -i "s|/downloads|$GITHUB_WORKSPACE/downloads|g" ~/.config/transmission/settings.json
         cat ~/.config/transmission/settings.json
-    - uses: actions/checkout@v2.1.0
+    
     - name: mkdir and space
       run: |
         sudo mkdir $GITHUB_WORKSPACE/downloads && sudo chmod 777 $GITHUB_WORKSPACE/downloads
