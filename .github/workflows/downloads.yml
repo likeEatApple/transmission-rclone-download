@@ -7,6 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.1.0
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 256
+          swap-size-mb: 256
+          remove-dotnet: 'true'
+          temp-reserve-mb: 64
+          remove-android: 'true'
+          remove-haskell: 'true'
     - name: Enable BBR
       run: |
 
