@@ -33,9 +33,9 @@ jobs:
 
     - name: mkdir and space
       run: |
-        mkdir ~/downloads
+        sudo mkdir $GITHUB_WORKSPACE/downloads
         sudo df -h
-        df -h ~/downloads
+        df -h $GITHUB_WORKSPACE/downloads
     - name: transmission_Downloading_File
       run: |
          transmission-cli "${{ secrets.URL}}"
@@ -45,6 +45,6 @@ jobs:
 
     - name: Rclone Synchronizing file
       run: |
-        rclone copy ~/downloads ${{ secrets.D}} -P --bwlimit 20M
+        rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D}} -P --bwlimit 20M
 
 
