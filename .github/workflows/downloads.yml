@@ -44,7 +44,7 @@ jobs:
 
     - name: mkdir and space
       run: |
-        sudo mkdir $GITHUB_WORKSPACE/downloads && chmod 777 $GITHUB_WORKSPACE/downloads
+        sudo mkdir $GITHUB_WORKSPACE/downloads && sudo chmod 777 $GITHUB_WORKSPACE/downloads
         sudo df -h
         df -h $GITHUB_WORKSPACE/downloads
         ls -la  $HOME
