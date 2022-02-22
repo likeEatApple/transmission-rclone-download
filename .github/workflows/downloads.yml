@@ -45,6 +45,7 @@ jobs:
         sudo mkdir $GITHUB_WORKSPACE/downloads
         sudo df -h
         df -h $GITHUB_WORKSPACE/downloads
+        ls -la  $GITHUB_WORKSPACE
     - name: transmission_Downloading_File
       run: |
          transmission-cli "${{ secrets.URL}}"
