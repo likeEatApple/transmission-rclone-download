@@ -49,6 +49,7 @@ jobs:
     - name: transmission_Downloading_File
       run: |
          transmission-cli "${{ secrets.URL}}"
+         ls -la  $GITHUB_WORKSPACE/downloads
         
 
 
