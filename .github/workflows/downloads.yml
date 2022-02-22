@@ -47,6 +47,7 @@ jobs:
         sudo mkdir $GITHUB_WORKSPACE/downloads && sudo chmod 777 $GITHUB_WORKSPACE/downloads
         sudo df -h
         df -h $GITHUB_WORKSPACE/downloads
+        ls
 
 
     - name: transmission_Downloading_File
