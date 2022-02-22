@@ -33,7 +33,7 @@ jobs:
 
     - name: mkdir and space
       run: |
-        sudo mkdir /root/downloads
+        sudo mkdir ~/downloads
         sudo df -h
     - name: transmission_Downloading_File
       run: |
@@ -44,6 +44,6 @@ jobs:
 
     - name: Rclone Synchronizing file
       run: |
-        sudo rclone copy /root/downloads ${{ secrets.D}} -P --bwlimit 20M
+        sudo rclone copy ~/downloads ${{ secrets.D}} -P --bwlimit 20M
 
 
