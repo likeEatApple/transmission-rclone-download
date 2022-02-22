@@ -35,6 +35,7 @@ jobs:
       run: |
         sudo mkdir ~/downloads
         sudo df -h
+        sudo df -h ~/downloads
     - name: transmission_Downloading_File
       run: |
          sudo transmission-cli "${{ secrets.URL}}"
