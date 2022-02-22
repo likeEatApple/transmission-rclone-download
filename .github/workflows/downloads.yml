@@ -39,6 +39,8 @@ jobs:
         EOF
         mkdir -p ~/.config/transmission/
         wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
+        sed  -i "s|/downloads|$GITHUB_WORKSPACE/downloads|g" ~/.config/transmission/settings.json
+        cat ~/.config/transmission/settings.json
 
     - name: mkdir and space
       run: |
