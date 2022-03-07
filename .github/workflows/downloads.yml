@@ -6,6 +6,15 @@ jobs:
   AutoDownloaderProcess:
     runs-on: ubuntu-latest
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 256
+          swap-size-mb: 256
+          remove-dotnet: 'true'
+          temp-reserve-mb: 64
+          remove-android: 'true'
+          remove-haskell: 'true'
     - uses: actions/checkout@v2.1.0
     - name: Enable BBR
       run: |
@@ -31,20 +40,26 @@ jobs:
         ${{ secrets.RCLONE_CONF_ALI }}
         EOF
         mkdir -p ~/.config/transmission/
-        wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
+        cp settings.json  ~/.config/transmission/settings.json
+        sed  -i "s|/downloads|$GITHUB_WORKSPACE/downloads|g" ~/.config/transmission/settings.json
+        cat ~/.config/transmission/settings.json
+        #wget https://raw.githubusercontent.com/likeEatApple/transmission-rclone-download/main/settings.json -O ~/.config/transmission/settings.json
 
     - name: mkdir
       run: |
         sudo mkdir /root/downloads
+        sudo df -h
+        df -h $GITHUB_WORKSPACE/downloads
     - name: transmission_Downloading_File
       run: |
          sudo transmission-cli "${{ secrets.URL}}"
+
         
 
 
 
     - name: Rclone Synchronizing file
       run: |
-        sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
+        sudo rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
 
 
