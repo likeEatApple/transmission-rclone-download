@@ -53,7 +53,7 @@ jobs:
         ls
     - name: transmission_Downloading_File
       run: |
-         sudo transmission-cli "${{ secrets.URL}}"
+         transmission-cli "${{ secrets.URL}}"
 
         
 
@@ -61,6 +61,6 @@ jobs:
 
     - name: Rclone Synchronizing file
       run: |
-        sudo rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
+        rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
 
 
