@@ -32,7 +32,7 @@ jobs:
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
     - name: docker Install
-      run: docker run -d --name=webdav-aliyundriver --restart=always -p 127.0.0.1:8080:8080  -v /etc/localtime:/etc/localtime -e TZ="Asia/Shanghai" -e ALIYUNDRIVE_REFRESH_TOKEN="${{ secrets.ALI_TOKEN}}" -e ALIYUNDRIVE_AUTH_PASSWORD="admin" -e JAVA_OPTS="-Xmx1g" zx5253/webdav-aliyundriver
+      run: docker run -d --name=webdav-aliyundriver --restart=always -p 127.0.0.1:8080:8080  -v /etc/localtime:/etc/localtime -e TZ="Asia/Shanghai" -e ALIYUNDRIVE_REFRESH_TOKEN="${{ secrets.ALI_TOKEN}}" -e ALIYUNDRIVE_AUTH_PASSWORD="admin" -e JAVA_OPTS="-Xmx1g" mxy9/webdav-aliyundriver
     - name: Inject Rclone&Transmission config
       run: |
         mkdir -p ~/.config/rclone/
