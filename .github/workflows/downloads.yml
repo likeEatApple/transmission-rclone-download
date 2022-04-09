@@ -6,6 +6,15 @@ jobs:
   AutoDownloaderProcess:
     runs-on: ubuntu-latest
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 256
+          swap-size-mb: 256
+          remove-dotnet: 'true'
+          temp-reserve-mb: 64
+          remove-android: 'true'
+          remove-haskell: 'true'
     - uses: actions/checkout@v2.1.0
     - name: Enable BBR
       run: |
@@ -23,9 +32,8 @@ jobs:
     - name: yt-dlp Install
       run: sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && sudo chmod a+rx /usr/local/bin/yt-dlp
 
-    - name:  aria2c install 
-      run: sudo apt-get install aria2
-    - name: docker Install
+
+    - name: docker aliyunpan Install
       run: docker run -d --name=webdav-aliyundriver --restart=always -p 127.0.0.1:8080:8080  -v /etc/localtime:/etc/localtime -e TZ="Asia/Shanghai" -e ALIYUNDRIVE_REFRESH_TOKEN="${{ secrets.ALI_TOKEN}}" -e ALIYUNDRIVE_AUTH_PASSWORD="admin" -e JAVA_OPTS="-Xmx1g" mxy9/webdav-aliyundriver
     - name: Inject Rclone&Transmission config
       run: |
@@ -37,7 +45,7 @@ jobs:
 
     - name: mkdir
       run: |
-        sudo mkdir /root/downloads
+        sudo mkdir $GITHUB_WORKSPACE/downloads
     - name: yt-dlp_Downloading_File
       run: |
         sudo cat >  ~/1.txt  << EOF
@@ -45,7 +53,7 @@ jobs:
         EOF
         sudo cat ~/1.txt
         #sudo wget https://raw.githubusercontent.com/likeEatingApples/transmission-rclone-download/youtube-dl-aliwangpan/1.txt -O /root/1.txt
-        (sudo yt-dlp  -v --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors -o '/root/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt ) || true
+        (sudo yt-dlp  -v --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors -o '$GITHUB_WORKSPACE/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt ) || true
         #sudo youtube-dl  -v   --ignore-errors -o '/root/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt
 
 
@@ -55,6 +63,5 @@ jobs:
         #sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
         #sudo rclone copy /root/downloads aliyunpan:/bilibili/ -P --bwlimit 20M
         #sudo rclone copy /root/downloads  aliyunpan:/bilibili/${{ secrets.aliyunpan_bilibili}} -P --bwlimit 20M
-        sudo rclone copy /root/downloads  aliyunpan_crypt:/bilibili/${{ secrets.aliyunpan_dir}} -P --bwlimit 20M -vv
-
+        (sudo rclone copy $GITHUB_WORKSPACE/downloads  aliyunpan_crypt:/bilibili/${{ secrets.aliyunpan_dir}} -P --bwlimit 20M -vv) || true
 
