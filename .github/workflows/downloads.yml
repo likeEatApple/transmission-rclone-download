@@ -46,7 +46,8 @@ jobs:
     - name: mkdir
       run: |
         sudo mkdir $GITHUB_WORKSPACE/downloads
-        df -h $GITHUB_WORKSPACE
+        df -h /var/lib/
+        df -h
     - name: yt-dlp_Downloading_File
       run: |
         sudo cat >  ~/1.txt  << EOF
