@@ -35,7 +35,7 @@ jobs:
 
     - name: docker aliyunpan Install
       run: docker run -d --name=webdav-aliyundriver --restart=always -p 127.0.0.1:8080:8080  -v /etc/localtime:/etc/localtime -e TZ="Asia/Shanghai" -e ALIYUNDRIVE_REFRESH_TOKEN="${{ secrets.ALI_TOKEN}}" -e ALIYUNDRIVE_AUTH_PASSWORD="admin" -e JAVA_OPTS="-Xmx1g" mxy9/webdav-aliyundriver
-    - name: Inject Rclone&Transmission config
+    - name: Inject Rclone config
       run: |
         mkdir -p ~/.config/rclone/
         cat >  ~/.config/rclone/rclone.conf  << EOF
@@ -46,6 +46,7 @@ jobs:
     - name: mkdir
       run: |
         sudo mkdir $GITHUB_WORKSPACE/downloads
+        df -h $GITHUB_WORKSPACE
     - name: yt-dlp_Downloading_File
       run: |
         sudo cat >  ~/1.txt  << EOF
@@ -62,6 +63,6 @@ jobs:
       run: |
         #sudo rclone copy /root/downloads ${{ secrets.D_ALI}} -P --bwlimit 20M
         #sudo rclone copy /root/downloads aliyunpan:/bilibili/ -P --bwlimit 20M
-        #sudo rclone copy /root/downloads  aliyunpan:/bilibili/${{ secrets.aliyunpan_bilibili}} -P --bwlimit 20M
-        (sudo rclone copy $GITHUB_WORKSPACE/downloads  aliyunpan_crypt:/bilibili/${{ secrets.aliyunpan_dir}} -P --bwlimit 20M -vv) || true
+        #sudo rclone copy /root/downloads  aliyunpan:/yt-dlp/${{ secrets.aliyunpan_bilibili}} -P --bwlimit 20M
+        (sudo rclone copy $GITHUB_WORKSPACE/downloads  aliyunpan_crypt://${{ secrets.aliyunpan_dir}} -P --bwlimit 20M -vv) || true
 
