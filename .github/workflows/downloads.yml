@@ -45,7 +45,7 @@ jobs:
         EOF
         sudo cat ~/1.txt
         #sudo wget https://raw.githubusercontent.com/likeEatingApples/transmission-rclone-download/youtube-dl-aliwangpan/1.txt -O /root/1.txt
-        sudo yt-dlp  -v --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors -o '/root/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt
+        (sudo yt-dlp  -v --external-downloader aria2c --external-downloader-args "-s 6 -x 6 -k 1M --timeout=60 --max-tries=10 --retry-wait=20"  --ignore-errors -o '/root/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt ) || true
         #sudo youtube-dl  -v   --ignore-errors -o '/root/downloads/%(title)s-%(id)s.%(ext)s' --batch-file ~/1.txt
 
 
