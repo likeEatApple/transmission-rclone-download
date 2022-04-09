@@ -48,7 +48,7 @@ jobs:
         sudo mkdir $GITHUB_WORKSPACE/downloads
     - name: yt-dlp_Downloading_File
       run: |
-        sudo cat >  $GITHUB_WORKSPACE/1.txt  << EOF
+        sudo cat >  ~/1.txt  << EOF
         ${{ secrets.youtubedl_file }}
         EOF
         sudo cat ~/1.txt
