@@ -34,7 +34,9 @@ jobs:
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
     - name: warps
-      run: wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash menu.sh d
+      run: sudo wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash menu.sh d 1
+    - name: ip
+      run: curl ip.sb
     #- u ses: actions/checkout@v2.1.0
     - name: Inject Rclone&Transmission config
       run: |
