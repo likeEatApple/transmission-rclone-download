@@ -72,6 +72,6 @@ jobs:
 
     - name: Rclone Synchronizing file
       run: |
-        rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D}} -P --bwlimit 20M
+        rclone copy $GITHUB_WORKSPACE/downloads ${{ secrets.D}} -P --bwlimit 20M --quiet
 
 
