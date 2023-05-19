@@ -6,6 +6,10 @@ jobs:
   AutoDownloaderProcess:
     runs-on: ubuntu-latest
     steps:
+    - name: warps
+      run: sudo -i wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && sudo -i bash menu.sh d 1
+    - name: ip
+      run: curl ip.sb
     
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
@@ -33,10 +37,7 @@ jobs:
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
-    - name: warps
-      run: sudo wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash menu.sh d 1
-    - name: ip
-      run: curl ip.sb
+
     #- u ses: actions/checkout@v2.1.0
     - name: Inject Rclone&Transmission config
       run: |
