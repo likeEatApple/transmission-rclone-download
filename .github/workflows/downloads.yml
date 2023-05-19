@@ -33,6 +33,8 @@ jobs:
       run: curl https://rclone.org/install.sh | sudo bash
     - name: Transmission-cli Install
       run: sudo apt install -y  transmission-cli
+    - name: warps
+      run: wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash menu.sh d
     #- u ses: actions/checkout@v2.1.0
     - name: Inject Rclone&Transmission config
       run: |
