@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: warps
-      run: sudo  bash <<(curl -fsSL git.io/warp.sh) 4
+      run: sudo  bash < <(curl -fsSL git.io/warp.sh) 4
       #run: sudo -i wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && sudo -i bash menu.sh d
     - name: ip
       run: curl ip.sb
